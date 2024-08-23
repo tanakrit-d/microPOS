@@ -1,5 +1,17 @@
-![](assets/images/demo/screen_example.png)
-# microPOS
+<div align="center">
+  <img src="assets/images/brand-micro/app-icon-web.png" width="100">
+  <p><strong>microPOS:</strong> Point-of-Sales Demo App</p>
+</div>
+
+----
+
+<div align="center">
+  <a href="https://youtu.be/q99TYA7LnuA">
+    <img src="assets/images/demo/screen_example.png" width="80%">
+  </a>
+</div>
+
+# Overview
 Basic POS implementation using Expo and TypeScript.  
 Currently writing the backend with Python + Supabase for API functionality.  
 All data (menu, orders, etc.) is currently hardcoded. Once the basic MVP layout has been finished, I'll start connecting it with the backend for storage and dynamic data.  
