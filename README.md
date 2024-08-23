@@ -7,7 +7,7 @@
 
 <div align="center">
   <a href="https://youtu.be/q99TYA7LnuA">
-    <img src="assets/images/demo/screen_example.png" width="80%">
+    <img src="assets/images/demo/screens.png" width="80%">
   </a>
 </div>
 
