@@ -1,9 +1,8 @@
-# microPOS
 ![](assets/images/demo/screen_example.png)
-
+# microPOS
 Basic POS implementation using Expo and TypeScript.  
 Currently writing the backend with Python + Supabase for API functionality.  
-All data (menu, orders, etc.) is currently hardcoded. Once the basic MVP layout has been finished, I'll start connecting it with the backend of storage and dynamic data.  
+All data (menu, orders, etc.) is currently hardcoded. Once the basic MVP layout has been finished, I'll start connecting it with the backend for storage and dynamic data.  
 
 1. Install dependencies
    ```bash
@@ -12,12 +11,12 @@ All data (menu, orders, etc.) is currently hardcoded. Once the basic MVP layout 
 
 2. Start the app
    ```bash
-    npx expo start
+   npx expo start
    ```
 
 3. Build for native code
    ```bash
-    npx expo build:ios
+   npx expo build:ios
    ```
 
 # To-do
@@ -32,6 +31,7 @@ All data (menu, orders, etc.) is currently hardcoded. Once the basic MVP layout 
 - Order details (table, name, total)
 
 ### Code/Functionality
+- Use variables for list item dimensions
 - Subscribing with zustand for order/cart state
 - Adding new menu items
 - Order submission

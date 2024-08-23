@@ -86,7 +86,7 @@ const RenderMenuList: React.FC<RenderMenuListProps> = ({ listData, numColumns = 
             <View
                 style={{
                     height: 120,
-                    width: itemSize,
+                    width: 120,
                     margin: gap / 2,
                     alignItems: 'center'
                 }}
@@ -138,6 +138,8 @@ const styles = StyleSheet.create({
         flex: 1,
         backgroundColor: '#fff',
         flexDirection: 'row',
+        justifyContent: 'space-evenly',
+        alignContent: 'space-evenly',
         alignItems: 'center',
         paddingHorizontal: 10,
     },

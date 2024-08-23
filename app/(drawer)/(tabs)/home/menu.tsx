@@ -21,7 +21,7 @@ export default function MenuPage() {
             initialRouteName='MainScreen'
             screenOptions={{
                 tabBarActiveTintColor: '#10b981',
-                tabBarLabelStyle: { fontSize: 14, color: '#000' },
+                tabBarLabelStyle: { fontSize: 12, color: '#000' },
                 tabBarStyle: { backgroundColor: '#fff' },
                 tabBarIndicatorStyle: {
                     backgroundColor: Colors['light'].tint,
