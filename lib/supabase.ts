@@ -1,13 +1,10 @@
 import AsyncStorage from '@react-native-async-storage/async-storage'
 import { AppState } from 'react-native';
 import { createClient } from '@supabase/supabase-js'
-import dotenvFlow from 'dotenv-flow';
 import * as AuthStore from '@/store/authStore';
 
-dotenvFlow.config();
-
-const SUPABASE_URL = process.env.SUPABASE_URL
-const API_KEY = process.env.API_KEY
+const SUPABASE_URL = process.env.EXPO_PUBLIC_SUPABASE_URL;
+const API_KEY = process.env.EXPO_PUBLIC_API_KEY;
 
 export const supabase = createClient(SUPABASE_URL!, API_KEY!, {
     auth: {
