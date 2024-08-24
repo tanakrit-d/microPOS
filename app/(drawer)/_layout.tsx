@@ -4,9 +4,10 @@ import { Drawer } from "expo-router/drawer";
 import { DrawerContentScrollView, DrawerItem } from "@react-navigation/drawer";
 import { Ionicons } from "@expo/vector-icons";
 import { router, usePathname } from "expo-router";
-import { ProtocolLogo, ProtoLogo, MicroLogo } from "@/components/SVG";
+import { MicroLogo } from "@/components/SVG";
 import { Colors } from '@/constants/Colors';
 import { useColorScheme } from '@/hooks/useColorScheme';
+import { supabase } from "@/lib/supabase";
 
 const CustomDrawerContent = (props: any) => {
     const colorScheme = useColorScheme();
@@ -20,7 +21,7 @@ const CustomDrawerContent = (props: any) => {
         <DrawerContentScrollView {...props}>
             <View style={styles.companyInfoWrapper}>
                 <View style={styles.companyLogo}>
-                    <MicroLogo colorPrimary="#10b981" colorSecondary="#34d399"/>
+                    <MicroLogo colourPrimary="#10b981" colourSecondary="#34d399" />
                 </View>
                 <View style={{ paddingLeft: 10 }}>
                     <Text style={styles.companyName}>microPOS</Text>
@@ -99,6 +100,23 @@ const CustomDrawerContent = (props: any) => {
                     router.push("/admin");
                 }}
             />
+            <DrawerItem
+                icon={({ color, size }) => (
+                    <Ionicons
+                        name="exit-outline"
+                        size={size}
+                        color={"#000"}
+                    />
+                )}
+                label={"Logout"}
+                labelStyle={[
+                    styles.navItemLabel,
+                    { color: "#000" },
+                ]}
+                onPress={() => supabase.auth.signOut()}
+
+            >
+            </DrawerItem>
         </DrawerContentScrollView>
     );
 };
@@ -155,7 +173,3 @@ const styles = StyleSheet.create({
         paddingTop: 8,
     },
 });
-
-{/* <View style={styles.drawerHeader}>
-    <Text style={styles.companyArea}>Restaraunt Point of Sales</Text>
-</View> */}

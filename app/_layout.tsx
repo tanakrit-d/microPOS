@@ -1,47 +1,14 @@
 import { useFonts } from 'expo-font';
+import Auth from '@/components/Authentication'
 import * as SplashScreen from 'expo-splash-screen';
 import { useEffect, useState, useCallback } from 'react';
 import { View } from "react-native";
 import { useColorScheme } from '@/hooks/useColorScheme';
 import { Slot, Stack, useRouter, useSegments } from 'expo-router'
 import * as Font from 'expo-font';
-
-
-
-// const InitialLayout = () => {
-//   const { session, initialized } = useAuth()
-//   const segments = useSegments()
-//   const router = useRouter()
-//   const [loaded] = useFonts({
-//     'Corinthian-Bold-Plain': require('../assets/fonts/Corinthian-Bold-Plain.ttf'),
-//     'SpaceMono': require('../assets/fonts/SpaceMono-Regular.ttf'),
-//   });
-
-//   useEffect(() => {
-//     if (!initialized) return
-
-//     // Check if the path/url is in the (auth) group
-//     const inAuthGroup = segments[0] === '(drawer)'
-
-//     if (session && !inAuthGroup) {
-//       // Redirect authenticated users to the list page
-//       router.replace('/(drawer)')
-//     } else if (!session) {
-//       // Redirect unauthenticated users to the login page
-//       router.replace('/(auth)')
-//     }
-//   }, [session, initialized])
-
-//   useEffect(() => {
-//     if (loaded) {
-//       SplashScreen.hideAsync()
-//     }
-//   }, [loaded]);
-
-//   return (
-//     <Slot />
-//   )
-// }
+import { toast, Toasts } from '@backpackapp-io/react-native-toast';
+import { Session } from '@supabase/supabase-js'
+import { supabase } from '@/lib/supabase'
 
 SplashScreen.preventAutoHideAsync();
 
@@ -53,6 +20,7 @@ const loadFonts = () => Font.loadAsync({
 export default function RootLayout() {
   const colorScheme = useColorScheme();
   const [appIsReady, setAppIsReady] = useState(false);
+  const [session, setSession] = useState<Session | null>(null)
 
   useEffect(() => {
     async function prepare() {
@@ -67,6 +35,16 @@ export default function RootLayout() {
     prepare();
   }, []);
 
+  useEffect(() => {
+    supabase.auth.getSession().then(({ data: { session } }) => {
+      setSession(session)
+    })
+
+    supabase.auth.onAuthStateChange((_event, session) => {
+      setSession(session)
+    })
+  }, [])
+
   const onLayoutRootView = useCallback(async () => {
     if (appIsReady) {
       await SplashScreen.hideAsync();
@@ -79,14 +57,16 @@ export default function RootLayout() {
 
   return (
     <View style={{ flex: 1 }} onLayout={onLayoutRootView}>
-      <Stack>
-        <Stack.Screen
-          name="(drawer)"
-          options={{
-            headerShown: false,
-          }}
-        />
-      </Stack>
+      {session && session.user ?
+        <Stack>
+          <Stack.Screen
+            name="(drawer)"
+            options={{
+              headerShown: false,
+            }}
+          />
+        </Stack>
+        : <Auth />}
     </View>
   );
 }
