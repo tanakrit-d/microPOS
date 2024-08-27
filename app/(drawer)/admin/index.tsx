@@ -1,38 +1,22 @@
 import React, { useEffect, useState } from 'react';
 import { View, Text, StyleSheet, Pressable } from 'react-native';
-import { Picker } from '@react-native-picker/picker';
-
-
-const CreateMenuItem = () => {
-    const [selectedLanguage, setSelectedLanguage] = useState();
-
-    return (
-        <View>
-            <Picker
-                selectedValue={selectedLanguage}
-                onValueChange={(itemValue, itemIndex) =>
-                    setSelectedLanguage(itemValue)
-                }>
-                <Picker.Item label="Java" value="java" />
-                <Picker.Item label="JavaScript" value="js" />
-            </Picker>
-        </View>
-    )
-}
+import { router, usePathname } from "expo-router";
 
 export default function AdminScreen() {
 
     return (
         <View style={styles.container}>
-            <Text>Hello from the Admin (currently feature debugging) page!</Text>
-            <Pressable onPress={CreateMenuItem} style={styles.coolButton}>
-                <Text style={{ padding: 8, color: 'white' }}>Add Menu Item</Text>
+            <Text>Features available for debugging:</Text>
+            <Pressable onPress={() => {
+                    router.navigate("/admin/create");
+                }} style={styles.coolButton}>
+                <Text style={styles.coolButtonText}>Add Menu Item</Text>
             </Pressable>
             <Pressable style={styles.coolButton}>
-                <Text style={{ padding: 8, color: 'white' }}>View Menu Item</Text>
+                <Text style={styles.coolButtonText}>View Menu Item</Text>
             </Pressable>
             <Pressable style={styles.coolButton}>
-                <Text style={{ padding: 8, color: 'white' }}>Edit Menu Item</Text>
+                <Text style={styles.coolButtonText}>Edit Menu Item</Text>
             </Pressable>
         </View>
     )
@@ -49,5 +33,11 @@ const styles = StyleSheet.create({
         backgroundColor: 'black',
         borderRadius: 8,
         margin: 2,
+        width: '60%',
+    },
+    coolButtonText: {
+        padding: 8,
+        color: 'white',
+        textAlign:'center' ,
     },
 });

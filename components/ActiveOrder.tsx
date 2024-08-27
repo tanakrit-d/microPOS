@@ -80,7 +80,7 @@ const styles = StyleSheet.create({
         backgroundColor: '#2cc56f',
         borderRadius: 8,
         alignItems: 'center',
-        paddingLeft: 10,
+        marginLeft: 10,
     },
     buttonSubmitText: {
         color: '#FFFFFF',
@@ -93,7 +93,7 @@ const styles = StyleSheet.create({
         backgroundColor: '#8eddb1',
         borderRadius: 8,
         alignItems: 'center',
-        paddingLeft: 10,
+        marginLeft: 10,
     },
     buttonSubmitTextDisabled: {
         color: '#ffffff',

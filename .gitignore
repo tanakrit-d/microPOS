@@ -15,6 +15,7 @@ npm-debug.log
 yarn-error.log
 package-lock.json
 bun.lockb
+pnpm-lock.yaml
 
 # Env
 .envrc.local

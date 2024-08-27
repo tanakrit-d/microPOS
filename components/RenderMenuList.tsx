@@ -7,7 +7,6 @@ import useOrderStore from '@/store/orderStore';
 import useListUpdateStore from '@/store/listUpdateStore';
 import ContextMenu from "react-native-context-menu-view";
 import MenuListColumns from '@/components/MenuListColumns';
-import { Ionicons } from '@expo/vector-icons';
 import TextToFillerImage from './TextToFillerImage';
 
 const gap = 10;
@@ -146,6 +145,7 @@ const styles = StyleSheet.create({
     menuItemImage: {
         width: 90,
         height: 90,
+        resizeMode: 'cover',
         borderRadius: 10,
         alignContent: 'center',
         alignItems: 'center',

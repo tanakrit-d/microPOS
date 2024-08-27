@@ -6,7 +6,7 @@ const useOrderStore = create<OrderState>((set) => ({
     count: 0,
     addItem: (item: Item) => set((state) => {
         state.count++;
-        const hasItem = state.items.find((i) => i.id == item.id);
+        const hasItem = state.items.find((i) => i.id === item.id);
 
         if (hasItem) {
             return {

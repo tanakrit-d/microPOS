@@ -33,15 +33,15 @@ const CustomDrawerContent = (props: any) => {
                     <Ionicons
                         name="home-outline"
                         size={size}
-                        color={pathname == "/home/menu" ? "#fff" : "#000"}
+                        color={pathname === "/home/menu" ? "#fff" : "#000"}
                     />
                 )}
                 label={"Home"}
                 labelStyle={[
                     styles.navItemLabel,
-                    { color: pathname == "/home/menu" ? "#fff" : "#000" },
+                    { color: pathname === "/home/menu" ? "#fff" : "#000" },
                 ]}
-                style={{ backgroundColor: pathname == "/home/menu" ? Colors[colorScheme ?? 'light'].tint : "#fff" }}
+                style={{ backgroundColor: pathname === "/home/menu" ? Colors[colorScheme ?? 'light'].tint : "#fff" }}
                 onPress={() => {
                     router.navigate("./home/menu");
                 }}
@@ -51,15 +51,15 @@ const CustomDrawerContent = (props: any) => {
                     <Ionicons
                         name="chatbox-outline"
                         size={size}
-                        color={pathname == "/chat" ? "#fff" : "#000"}
+                        color={pathname === "/chat" ? "#fff" : "#000"}
                     />
                 )}
                 label={"Chat"}
                 labelStyle={[
                     styles.navItemLabel,
-                    { color: pathname == "/chat" ? "#fff" : "#000" },
+                    { color: pathname === "/chat" ? "#fff" : "#000" },
                 ]}
-                style={{ backgroundColor: pathname == "/chat" ? Colors[colorScheme ?? 'light'].tint : "#fff" }}
+                style={{ backgroundColor: pathname === "/chat" ? Colors[colorScheme ?? 'light'].tint : "#fff" }}
                 onPress={() => {
                     router.push("/chat");
                 }}
@@ -69,15 +69,15 @@ const CustomDrawerContent = (props: any) => {
                     <Ionicons
                         name="settings-outline"
                         size={size}
-                        color={pathname == "/settings" ? "#fff" : "#000"}
+                        color={pathname === "/settings" ? "#fff" : "#000"}
                     />
                 )}
                 label={"Settings"}
                 labelStyle={[
                     styles.navItemLabel,
-                    { color: pathname == "/settings" ? "#fff" : "#000" },
+                    { color: pathname === "/settings" ? "#fff" : "#000" },
                 ]}
-                style={{ backgroundColor: pathname == "/settings" ? Colors[colorScheme ?? 'light'].tint : "#fff" }}
+                style={{ backgroundColor: pathname === "/settings" ? Colors[colorScheme ?? 'light'].tint : "#fff" }}
                 onPress={() => {
                     router.push("/settings");
                 }}
@@ -87,15 +87,15 @@ const CustomDrawerContent = (props: any) => {
                     <Ionicons
                         name="server-outline"
                         size={size}
-                        color={pathname == "/admin" ? "#fff" : "#000"}
+                        color={pathname === "/admin" ? "#fff" : "#000"}
                     />
                 )}
                 label={"Admin"}
                 labelStyle={[
                     styles.navItemLabel,
-                    { color: pathname == "/admin" ? "#fff" : "#000" },
+                    { color: pathname === "/admin" ? "#fff" : "#000" },
                 ]}
-                style={{ backgroundColor: pathname == "/admin" ? Colors[colorScheme ?? 'light'].tint : "#fff" }}
+                style={{ backgroundColor: pathname === "/admin" ? Colors[colorScheme ?? 'light'].tint : "#fff" }}
                 onPress={() => {
                     router.push("/admin");
                 }}

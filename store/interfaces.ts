@@ -3,7 +3,7 @@ export interface Item {
     title: string,
     price: number,
     description?: string,
-    category: string | Array<String>,
+    category: string | string[],
     image?: any,
 }
 
@@ -22,7 +22,7 @@ export interface ListUpdate {
 }
 
 export interface OrderState {
-    items: Array<Item & { quantity: number }>;
+    items: (Item & { quantity: number })[];
     addItem: (item: Item) => void;
     reduceItem: (item: Item) => void;
     clearOrder: () => void;

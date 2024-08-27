@@ -46,13 +46,14 @@ All data (menu, orders, etc.) is currently hardcoded. Once the basic MVP layout 
 - Use variables for list item dimensions
 - Subscribing with zustand for order/cart state
 - Adding new menu items
+   - Initial screen built; No backend functionality yet
 - Order submission
 - Android compatible context menu for menu items
 - Migrate to NativeWind/twrnc for styling
 - Light/dark mode
+- Add ingredients for `modify` context menu options
 
 ### Unimplemented Screens
-- Login/Authentication with Supabase
 - Tables [(Example: draggable grid)](https://github.com/SHISME/react-native-draggable-grid)
 - Chat
 - Settings

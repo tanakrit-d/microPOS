@@ -14,7 +14,7 @@ export const unstable_settings = {
 
 export default function MenuLayout() {
     const { count } = useOrderStore();
-    
+
     return (
         <Stack
             screenOptions={{
