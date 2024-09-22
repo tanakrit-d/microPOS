@@ -39,7 +39,22 @@
           ]
         }
       ],
-      "expo-secure-store"
+      "expo-secure-store",
+      [
+        "expo-image-picker",
+        {
+          "photosPermission": "The app accesses your photos to let you add pictures to menu items.",
+          "cameraPermission": "The app accesses your camera to let you scan QR Codes for payment."
+        }
+      ],
+      [
+        "@sentry/react-native/expo",
+        {
+          "url": "https://sentry.io/",
+          "project": "micropos",
+          "organization": "none-23j"
+        }
+      ]
     ],
     "experiments": {
       "typedRoutes": true

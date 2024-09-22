@@ -65,3 +65,4 @@ android/
 # iOS
 **/ios/.xcode.env.local
 ios/
+.env.local

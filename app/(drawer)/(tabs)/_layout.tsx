@@ -1,9 +1,9 @@
-import { Tabs } from 'expo-router';
-import React from 'react';
-import Ionicons from '@expo/vector-icons/Ionicons';
-import { Colors } from '@/constants/Colors';
-import { useColorScheme } from '@/hooks/useColorScheme';
-import { MaterialIcons } from '@expo/vector-icons';
+import { Tabs } from "expo-router";
+import React from "react";
+import Ionicons from "@expo/vector-icons/Ionicons";
+import { Colors } from "@/constants/Colors";
+import { useColorScheme } from "@/hooks/useColorScheme";
+import { MaterialIcons } from "@expo/vector-icons";
 
 export default function TabLayout() {
   const colorScheme = useColorScheme();
@@ -11,13 +11,14 @@ export default function TabLayout() {
   return (
     <Tabs
       screenOptions={{
-        tabBarActiveTintColor: Colors[colorScheme ?? 'light'].tint,
+        tabBarActiveTintColor: Colors[colorScheme ?? "light"].tint,
         tabBarStyle: { position: "absolute", elevation: 0 },
-      }}>
+      }}
+    >
       <Tabs.Screen
         name="home"
         options={{
-          title: 'Menu',
+          title: "Menu",
           headerShown: false,
           headerShadowVisible: false,
           tabBarIcon: ({ color, focused }) => (
@@ -28,7 +29,7 @@ export default function TabLayout() {
       <Tabs.Screen
         name="order"
         options={{
-          title: 'Orders',
+          title: "Orders",
           headerShown: false,
           headerShadowVisible: false,
           tabBarIcon: ({ color, focused }) => (
@@ -39,7 +40,7 @@ export default function TabLayout() {
       <Tabs.Screen
         name="table"
         options={{
-          title: 'Tables',
+          title: "Tables",
           headerShown: false,
           headerShadowVisible: false,
           tabBarIcon: ({ color, focused }) => (
