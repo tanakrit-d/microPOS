@@ -28,25 +28,27 @@ All data (menu, orders, etc.) is currently hardcoded. Once the basic MVP layout 
    ```
 
 3. Build for native code
+
    ```bash
-   npx expo build:ios
+   npx expo run:ios
    ```
 
 # To-do
 
-### Home/Menu Screen
+## Home/Menu Screen
 
 - Finish tabbed sub-menu navigation (e.g. Entrees, Mains, Drinks) [(Example: CoinBase implementation)](https://www.coinbase.com/blog/coinbases-animated-tabbar-in-react-native?source=linkShare-3089be4219ff-1621699865)
   - Generate one-time placeholder backgrounds (currently it's dynamic each time the list re-renders)
 - Add sorting functionality
+- Migrate to SectionList with horizontally scrolling view with jump-to buttons
 
-### Active Order Screen
+## Active Order Screen
 
 - Dine-in/takeaway toggle
 - Total price calculation
 - Order details (table, name, total)
 
-### Code/Functionality
+## Code/Functionality
 
 - Use variables for list item dimensions
 - Subscribing with zustand for order/cart state
@@ -58,7 +60,7 @@ All data (menu, orders, etc.) is currently hardcoded. Once the basic MVP layout 
 - Light/dark mode
 - Add ingredients for `modify` context menu options
 
-### Unimplemented Screens
+## Unimplemented Screens
 
 - Tables [(Example: draggable grid)](https://github.com/SHISME/react-native-draggable-grid)
 - Chat

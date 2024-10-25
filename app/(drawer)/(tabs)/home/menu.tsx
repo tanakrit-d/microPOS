@@ -1,11 +1,9 @@
 import React, { useRef, useState, useMemo } from "react";
 import {
+  Dimensions,
   StyleSheet,
   View,
-  ViewProps,
-  Text,
   useWindowDimensions,
-  Alert,
   Pressable,
 } from "react-native";
 import RenderMenuList from "@/components/RenderMenuList";
@@ -16,8 +14,6 @@ import dessert from "@/assets/data/item_dessert";
 import useOrderStore from "@/store/orderStore";
 import { useBottomTabBarHeight } from "@react-navigation/bottom-tabs";
 import { createMaterialTopTabNavigator } from "@react-navigation/material-top-tabs";
-import { NavigationContainer } from "@react-navigation/native";
-import { useHeaderHeight } from "@react-navigation/elements";
 import { Colors } from "@/constants/Colors";
 import { useColorScheme } from "@/hooks/useColorScheme";
 
@@ -26,12 +22,19 @@ export default function MenuPage() {
   return (
     <Tab.Navigator
       initialRouteName="MainScreen"
+      initialLayout={{
+        width: Dimensions.get('window').width
+      }}
       screenOptions={{
         tabBarActiveTintColor: "#10b981",
         tabBarLabelStyle: { fontSize: 12, color: "#000" },
         tabBarStyle: { backgroundColor: "#fff" },
         tabBarIndicatorStyle: {
           backgroundColor: Colors["light"].tint,
+          justifyContent: "space-around",
+        },
+        tabBarContentContainerStyle: {
+          justifyContent: "space-around",
         },
       }}
     >

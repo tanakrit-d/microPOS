@@ -26,7 +26,7 @@ export default function AdminLayout() {
       <Stack.Screen
         name="api"
         options={{
-          headerTitle: "API Testing",
+          headerTitle: "API Feature Debugging",
           headerShown: true,
           headerLargeTitle: true,
           headerShadowVisible: false,

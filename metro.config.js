@@ -1,15 +1,11 @@
-import path from 'path';
-import { fileURLToPath } from 'url';
-
-const { getDefaultConfig } = require("expo/metro-config");
-const { getSentryExpoConfig } = require("@sentry/react-native/metro");
+const { getDefaultConfig } = require('expo/metro-config');
+const { getSentryExpoConfig } = require('@sentry/react-native/metro');
 const { withNativeWind } = require('nativewind/metro');
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
+const projectRoot = __dirname;
 
-const config = getDefaultConfig(__dirname);
-const sentryConfig = getSentryExpoConfig(__dirname);
+const config = getDefaultConfig(projectRoot);
+const sentryConfig = getSentryExpoConfig(projectRoot);
 
 const mergedConfig = {
   ...config,
@@ -17,13 +13,13 @@ const mergedConfig = {
   transformer: {
     ...config.transformer,
     ...sentryConfig.transformer,
-    babelTransformerPath: require.resolve("react-native-svg-transformer/expo"),
+    babelTransformerPath: require.resolve('react-native-svg-transformer'),
   },
   resolver: {
     ...config.resolver,
     ...sentryConfig.resolver,
-    assetExts: config.resolver.assetExts.filter((ext) => ext !== "svg"),
-    sourceExts: [...config.resolver.sourceExts, "svg"],
+    assetExts: config.resolver.assetExts.filter((ext) => ext !== 'svg'),
+    sourceExts: [...config.resolver.sourceExts, 'svg', 'tsx', 'ts'],
   },
 };
 

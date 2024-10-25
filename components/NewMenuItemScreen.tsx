@@ -18,7 +18,7 @@ import { createItem } from "@/app/api/item/request";
 import { getCategories } from "@/app/api/category/request";
 import { CreateMenuItemSkeleton } from "./Skeletons";
 import { toast } from "sonner-native";
-import { z } from "zod";
+import { useMenuItemStore, MenuItemData} from "@/store/menuItemStore";
 
 interface MenuItemProps {
   isEditing: boolean;
@@ -32,29 +32,6 @@ interface MappedCategory {
   value: string;
   [key: string]: string;
 }
-
-
-const FormDataSchema = z.object({
-  title: z.string().optional(),
-  title_full: z.string().optional(),
-  description: z.string().optional(),
-  categories: z.array(z.string()).optional(),
-  price: z.number().optional(),
-  image_uri: z.string().optional(),
-  is_available: z.boolean(),
-});
-
-type FormData = z.infer<typeof FormDataSchema>;
-
-const initialFormData: FormData = {
-  title: '',
-  title_full: '',
-  description: '',
-  categories: [],
-  price: 0.00,
-  image_uri: '',
-  is_available: false,
-};
 
 const retrieveCategories = async (): Promise<MappedCategory[]> => {
   try {
@@ -75,46 +52,12 @@ const retrieveCategories = async (): Promise<MappedCategory[]> => {
   }
 }
 
-function transformToApiSchema(formData: FormData, initialFormData: FormData) {
-  const transformedData: Partial<FormData> = {};
-
-  if (formData.title !== initialFormData.title) {
-    transformedData.title = formData.title;
-  }
-
-  if (formData.title_full !== initialFormData.title_full) {
-    transformedData.title_full = formData.title_full || undefined;
-  }
-
-  if (formData.description !== initialFormData.description) {
-    transformedData.description = formData.description || undefined;
-  }
-
-  if (JSON.stringify(formData.categories) !== JSON.stringify(initialFormData.categories)) {
-    transformedData.categories = formData.categories || undefined;
-  }
-
-  if (formData.price !== initialFormData.price) {
-    transformedData.price = formData.price;
-  }
-
-  if (formData.image_uri !== initialFormData.image_uri) {
-    transformedData.image_uri = formData.image_uri || undefined;
-  }
-
-  if (formData.is_available !== initialFormData.is_available) {
-    transformedData.is_available = formData.is_available;
-  }
-
-  return ItemCreateSchema.parse(transformedData);
-}
-
 const MenuItemScreen: React.FC<MenuItemProps> = ({
   isEditing,
   onSave,
   maxTitleLength = 22,
 }) => {
-  const [formData, setFormData] = useState<FormData>(initialFormData)
+  const { MenuItemData, updateMenuItemField } = useMenuItemStore();
   const [categories, setCategories] = useState<MappedCategory[]>([])
   const [isLoading, setIsLoading] = useState(true);
   const [isAwaiting, setIsAwaiting] = useState(false);
@@ -146,14 +89,6 @@ const MenuItemScreen: React.FC<MenuItemProps> = ({
     console.log('placeholder!')
   }
 
-  const updateMenuItem = <K extends keyof FormData>(
-    field: K,
-    value: FormData[K]
-  ) => {
-    setFormData(prevMenuItem => {
-      const updatedMenuItem = { ...prevMenuItem, [field]: value };});
-  };
-
   const handleImagePick = async () => {
     const result = await ImagePicker.launchImageLibraryAsync({
       mediaTypes: ImagePicker.MediaTypeOptions.Images,
@@ -163,18 +98,18 @@ const MenuItemScreen: React.FC<MenuItemProps> = ({
     });
 
     if (!result.canceled) {
-      setFormData((prevItem) => ({ ...prevItem, image: result.assets[0].uri }));
+      updateMenuItemField('image_uri', result.assets[0].uri);
     }
   };
 
-  const handleSubmit = async (formData: FormData): Promise<ItemResponse> => {
+  const handleSubmit = async (menuItemData: MenuItemData): Promise<ItemResponse> => {
     try {
-      console.log(formData)
+      console.log(menuItemData)
       console.log('----')
       setIsAwaiting(true)
-      const payload = transformToApiSchema(formData, initialFormData);
-      console.log(payload)
-      return await createItem(payload)
+      // const payload = transformToApiSchema(formData, initialFormData);
+      console.log(menuItemData)
+      return await createItem(menuItemData)
     } catch (e) {
       throw e;
     } finally {
@@ -188,9 +123,9 @@ const MenuItemScreen: React.FC<MenuItemProps> = ({
       contentInsetAdjustmentBehavior="always"
     >
       <Pressable style={styles.imageContainer} onPress={handleImagePick}>
-        {formData.image_uri ? (
+        {MenuItemData.image_uri ? (
           <Image
-            source={{ uri: formData.image_uri }}
+            source={{ uri: MenuItemData.image_uri }}
             style={styles.image}
             contentFit="cover"
           />
@@ -209,21 +144,21 @@ const MenuItemScreen: React.FC<MenuItemProps> = ({
         </Text>
         <TextInput
           style={styles.input}
-          value={formData.title}
-          onChangeText={(value) => updateMenuItem('title', value)}
+          value={MenuItemData.title}
+          onChangeText={(value) => updateMenuItemField('title', value)}
           placeholder="Apple Pie"
           editable={isEditing}
           maxLength={maxTitleLength}
         />
         <Text style={styles.characterCount}>
-          {formData.title.length}/{maxTitleLength} characters
+          {MenuItemData.title.length}/{maxTitleLength} characters
         </Text>
 
         <Text style={styles.label}>Full Title</Text>
         <TextInput
           style={styles.input}
-          value={formData.title_full}
-          onChangeText={(value) => updateMenuItem('title_full', value)}
+          value={MenuItemData.title_full}
+          onChangeText={(value) => updateMenuItemField('title_full', value)}
           placeholder="Apple Pie with Rhubarb and Lemon"
           editable={isEditing}
         />
@@ -231,8 +166,8 @@ const MenuItemScreen: React.FC<MenuItemProps> = ({
         <Text style={styles.label}>Description</Text>
         <TextInput
           style={[styles.input, styles.textArea]}
-          value={formData.description}
-          onChangeText={(value) => updateMenuItem('description', value)}
+          value={MenuItemData.description}
+          onChangeText={(value) => updateMenuItemField('description', value)}
           placeholder="Green apples baked with rhubarb and lemon. Apple slices are then layered on top with cinnamon sugar. Served with a scoop of vanilla ice cream."
           multiline={true}
           numberOfLines={4}
@@ -246,7 +181,7 @@ const MenuItemScreen: React.FC<MenuItemProps> = ({
         <Dropdown
           placeholder="Select an option..."
           options={categories}
-          selectedValue={formData.categories}
+          selectedValue={MenuItemData.categories}
           onValueChange={(value: string) => console.log(value)}
           primaryColor={"#10b981"}
           isMultiple={true}
@@ -260,8 +195,8 @@ const MenuItemScreen: React.FC<MenuItemProps> = ({
         </Text>
         <TextInput
           style={styles.input}
-          value={formData.price.toString()}
-          onChangeText={(value) => updateMenuItem("price", parseFloat(value))}
+          value={MenuItemData.price.toString()}
+          onChangeText={(value) => updateMenuItemField("price", parseFloat(value))}
           placeholder="3.50"
           keyboardType="numeric"
           editable={isEditing}
@@ -270,14 +205,14 @@ const MenuItemScreen: React.FC<MenuItemProps> = ({
         <View style={styles.switchContainer}>
           <Text style={styles.switchLabel}>Available</Text>
           <Switch
-            value={formData.is_available}
-            onValueChange={(value) => updateMenuItem("is_available", value)}
+            value={MenuItemData.is_available}
+            onValueChange={(value) => updateMenuItemField("is_available", value)}
             disabled={!isEditing}
           />
         </View>
 
         {isEditing && (
-          <Pressable onPress={() => handleSubmit(formData)} style={styles.buttonSave}>
+          <Pressable onPress={() => handleSubmit(MenuItemData)} style={styles.buttonSave}>
             <Text style={styles.buttonSaveText}>Save</Text>
           </Pressable>
         )}

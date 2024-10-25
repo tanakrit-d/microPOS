@@ -46,7 +46,7 @@ const CustomDrawerContent = (props: any) => {
               : "#fff",
         }}
         onPress={() => {
-          router.navigate("./home/menu");
+          router.navigate("/home/menu");
         }}
       />
       <DrawerItem
